@@ -14,11 +14,24 @@
     <div class="jumbotron">
         <h1 class="display-4" th:text="${total}"></h1>
         <p class="lead">Total Cases of Confirmed Covid19 for Today</p>
-        <hr class="my-4">
         <p>
             <span>New cases since previous day</span>
             <span th:text="${difference}"></span>
         </p>
+        <hr class="my-4">
+        <form action="/search" method="get">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Search by state or country" aria-label="Recipient's username" aria-describedby="button-addon2" name="filter" required>
+                <div class="input-group-append">
+                    <input class="btn btn-outline-secondary" type="submit" id="button-addon2" value="Search"></input>
+                </div>
+            </div>
+        </form>
+        <form action="/" method="get">
+            <div class="input-group-append">
+                <input class="btn btn-outline-secondary" type="submit" id="button-addon1" value="Clear"></input>
+            </div>
+        </form>
     </div>
 
 
@@ -28,12 +41,14 @@
             <th scope="col">STATE</th>
             <th scope="col">COUNTRY</th>
             <th scope="col">Number Of Cases</th>
+            <th scope="col">New Cases</th>
         </tr>
         </thead>
         <tr th:each="country : ${countries}">
             <td th:text="${country.state}"></td>
             <td th:text="${country.country}"></td>
             <td th:text="${country.numberOfCases}"></td>
+            <td th:text="${country.difference}"></td>
         </tr>
     </table>
 
